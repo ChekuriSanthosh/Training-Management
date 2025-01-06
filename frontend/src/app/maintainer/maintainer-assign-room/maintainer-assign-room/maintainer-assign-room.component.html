@@ -1,0 +1,135 @@
+
+
+<div class="assign-room-container" style="margin-left: auto; margin-top: 4%;">
+  
+  <div class="toast-container" *ngIf="showToast" style="margin-top: 40px;">
+    <div class="toast" [class.toast-success]="toastType === 'success'" [class.toast-error]="toastType === 'error'">
+      <i class="fas" [class.fa-check-circle]="toastType === 'success'" [class.fa-exclamation-circle]="toastType === 'error'"></i>
+      <span>{{ toastMessage }}</span>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    
+    <div class="header-section">
+      <h1 class="title">
+        <i class="fas fa-door-open"></i> Assign Training Room
+      </h1>
+    </div>
+
+    
+    <div class="form-container">
+      <form [formGroup]="updateForm" (ngSubmit)="onSubmit()" class="assignment-form">
+        
+        <div class="form-group">
+          <label for="trainer">
+            <i class="fas fa-user-tie"></i> Select Trainer
+          </label>
+          <select 
+            id="trainer"
+            formControlName="trainer"
+            (change)="onTrainerSelect()"
+            [class.error]="updateForm.get('trainer')?.invalid && updateForm.get('trainer')?.touched"
+          >
+            <option value="">Choose a trainer</option>
+            <option *ngFor="let trainer of trainers" [value]="trainer.trainerId">
+              {{ trainer.trainerName }}
+            </option>
+          </select>
+          <div class="error-message" *ngIf="updateForm.get('trainer')?.invalid && updateForm.get('trainer')?.touched">
+            <i class="fas fa-exclamation-circle"></i>
+            Please select a trainer
+          </div>
+        </div>
+
+        <!-- Current Room Info -->
+        <div class="current-info" *ngIf="selectedTrainer">
+          <div class="info-card">
+            <div class="trainer-details">
+              <h3>Current Assignment</h3>
+              <p><i class="fas fa-envelope"></i> {{ selectedTrainer.trainerEmail }}</p>
+              <p><i class="fas fa-door-open"></i> 
+                {{ selectedTrainer.trainingRoom || 'No room assigned' }}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        
+        <div class="form-group">
+          <label for="trainingRoom">
+            <i class="fas fa-building"></i> New Training Room
+          </label>
+          <select 
+            id="trainingRoom"
+            formControlName="trainingRoom"
+            [class.error]="updateForm.get('trainingRoom')?.invalid && updateForm.get('trainingRoom')?.touched"
+          >
+            <option value="">Select training room</option>
+            <option *ngFor="let room of availableRooms" [value]="room">
+              {{ room }}
+            </option>
+          </select>
+          <div class="error-message" *ngIf="updateForm.get('trainingRoom')?.invalid && updateForm.get('trainingRoom')?.touched">
+            <i class="fas fa-exclamation-circle"></i>
+            Please select a training room
+          </div>
+        </div>
+
+        
+        <button type="submit" class="submit-btn" [disabled]="updateForm.invalid">
+          <i class="fas fa-save"></i> Assign Room
+        </button>
+      </form>
+    </div>
+
+    
+    <div class="table-container">
+      <h2 class="section-title">
+        <i class="fas fa-users"></i> Current Room Assignments
+      </h2>
+      
+      <div class="table-wrapper">
+        <table class="trainers-table">
+          <thead>
+            <tr>
+              <th><i class="fas fa-user"></i> Trainer Name</th>
+              <th><i class="fas fa-envelope"></i> Email</th>
+              <th><i class="fas fa-door-open"></i> Room</th>
+              <th><i class="fas fa-cogs"></i> Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let trainer of trainers">
+              <td>{{ trainer.trainerName }}</td>
+              <td>{{ trainer.trainerEmail }}</td>
+              <td>
+                <span class="room-badge" [class.no-room]="!trainer.trainingRoom">
+                  {{ trainer.trainingRoom || 'Not Assigned' }}
+                </span>
+              </td>
+              <td class="actions-cell">
+                <button 
+                  *ngIf="trainer.trainingRoom"
+                  class="unassign-btn"
+                  (click)="unassignRoom(trainer.trainerId)"
+                  title="Unassign Room"
+                >
+                  <i class="fas fa-times-circle"></i> Unassign
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      
+      <div class="empty-state" *ngIf="!trainers.length">
+        <i class="fas fa-users-slash"></i>
+        <p>No trainers found</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+

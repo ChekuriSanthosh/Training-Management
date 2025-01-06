@@ -1,0 +1,17 @@
+package com.capstone.admin.dtos;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class MaintainerRegisterDto {
+    private String maintainerName;
+    private String username;
+    private String password;
+    private String role;
+    private int userId;
+}

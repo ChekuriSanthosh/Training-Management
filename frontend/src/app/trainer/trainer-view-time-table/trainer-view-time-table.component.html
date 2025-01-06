@@ -1,0 +1,81 @@
+
+<div class="timetable-outer-container">
+  <div class="timetable-container">
+    
+    <div *ngIf="loading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading timetable...</p>
+    </div>
+
+    
+    <div *ngIf="error" class="error-message">
+      <p>{{ error }}</p>
+    </div>
+
+    
+    <div *ngIf="successMessage" class="success-message">
+      <p>{{ successMessage }}</p>
+    </div>
+
+    
+    <div *ngIf="!loading && !error" class="timetable-content">
+      <div class="timetable-header">
+        <h2>Training Room Timetable</h2>
+        <div class="room-badge" *ngIf="trainer?.trainingRoom">
+          {{ trainer?.trainingRoom }}
+        </div>
+      </div>
+
+      
+      <div *ngIf="!trainer?.timeTablePDF" class="no-timetable-message">
+        <div class="message-card">
+          <span class="icon warning-icon">⚠️</span>
+          <h3>No Timetable Available</h3>
+          <p>Currently, no timetable has been assigned to your training room.</p>
+        </div>
+      </div>
+
+      
+      <div *ngIf="trainer?.timeTablePDF" class="timetable-available">
+        <div class="pdf-info-card">
+          <div class="pdf-icon">
+            <span class="icon">📄</span>
+          </div>
+          
+          <div class="pdf-details">
+            <h3>{{ getFileName() }}</h3>
+            <p>Training Room: {{ trainer?.trainingRoom }}</p>
+          </div>
+
+          <div class="pdf-actions">
+            <a [href]="getPdfUrl()"
+               [download]="getDownloadName()"
+               class="action-button download">
+              <span class="icon">⬇️</span>
+              Download Timetable
+            </a>
+            <button (click)="showPreview()" class="action-button preview">
+              <span class="icon">🔍</span>
+              Preview Timetable
+            </button>
+          </div>
+        </div>
+
+        
+        <div *ngIf="previewUrl && isPreviewVisible" class="pdf-preview">
+          <div class="preview-header">
+            <h3>Preview Timetable</h3>
+            <button class="close-preview" (click)="hidePreview()">
+              <span class="icon">✖</span>
+            </button>
+          </div>
+          <iframe [src]="previewUrl" 
+                  width="100%" 
+                  height="600px" 
+                  frameborder="0">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> 

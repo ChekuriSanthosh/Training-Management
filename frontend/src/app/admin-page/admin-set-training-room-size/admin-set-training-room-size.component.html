@@ -1,0 +1,55 @@
+
+
+
+<main>
+  <div class="container pt-4">
+<div class="training-room-size-container">
+    <div class="room-size-card">
+      <h2 class="page-title"><b>Training Room Size Management</b></h2>
+      
+      
+      <div class="current-room-size">
+        <h3>Current Training Room Size</h3>
+        <ng-container *ngIf="currentRoomSize$ | async as currentSize; else loading">
+          <div class="room-size-display">
+            <span class="size-value">{{ currentSize }}</span>
+            <span class="size-label">Rooms</span>
+          </div>
+        </ng-container>
+        <ng-template #loading>
+          <div class="loading">Loading current room size...</div>
+        </ng-template>
+      </div>
+  
+      
+      <form [formGroup]="roomSizeForm" (ngSubmit)="onSubmit()" class="room-size-form">
+        <h3>Update Room Size</h3>
+        
+        <div class="form-group">
+          <label for="roomSize">New Room Size</label>
+          <input 
+            type="number" 
+            formControlName="roomSize" 
+            id="roomSize" 
+            class="form-control"
+            [ngClass]="{ 'is-invalid': submitted && f['roomSize'].errors }"
+          >
+          
+          <div *ngIf="submitted && f['roomSize'].errors" class="invalid-feedback">
+            <div *ngIf="f['roomSize'].errors['required']">Room size is required</div>
+            <div *ngIf="f['roomSize'].errors['min']">Room size must be at least 1</div>
+            <div *ngIf="f['roomSize'].errors['max']">Room size cannot exceed 100</div>
+          </div>
+        </div>
+  
+        <button type="submit" class="btn-submit">Update Room Size</button>
+  
+        <div *ngIf="submitSuccess" class="success-message">
+          Room size updated successfully!
+        </div>
+      </form>
+    </div>
+  </div>
+  </div>
+</main>
+  

@@ -1,0 +1,68 @@
+
+<div class="attendance-container" style="margin-left: auto; margin-top: 4%;">
+
+  <div class="toast-container" *ngIf="showToast" style="margin-top: 40px;">
+    <div class="toast" [class.toast-success]="toastType === 'success'" [class.toast-error]="toastType === 'error'">
+      <i class="fas" [class.fa-check-circle]="toastType === 'success'" [class.fa-exclamation-circle]="toastType === 'error'"></i>
+      <span>{{ toastMessage }}</span>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    
+    <div class="header-section">
+      <h1 class="title">
+        <i class="fas fa-calendar-plus"></i> Create Attendance
+      </h1>
+    </div>
+
+    
+    <div class="form-container">
+      <form [formGroup]="attendanceForm" (ngSubmit)="onSubmit()" class="attendance-form">
+        <div class="form-group">
+          <label for="room">
+            <i class="fas fa-door-open"></i> Training Room
+          </label>
+          <select 
+            id="room"
+            formControlName="room"
+            [class.error]="attendanceForm.get('room')?.invalid && attendanceForm.get('room')?.touched"
+          >
+            <option value="">Select Training Room</option>
+            <option *ngFor="let room of rooms" [value]="room">
+              {{ room }}
+            </option>
+          </select>
+          <div class="error-message" *ngIf="attendanceForm.get('room')?.invalid && attendanceForm.get('room')?.touched">
+            <i class="fas fa-exclamation-circle"></i>
+            Please select a training room
+          </div>
+        </div>
+
+        
+        <div class="form-group">
+          <label for="date">
+            <i class="fas fa-calendar-alt"></i> Attendance Date
+          </label>
+          <input 
+            type="date" 
+            id="date"
+            formControlName="date"
+            [min]="minDate | date:'yyyy-MM-dd'"
+            [class.error]="attendanceForm.get('date')?.invalid && attendanceForm.get('date')?.touched"
+          >
+          <div class="error-message" *ngIf="attendanceForm.get('date')?.invalid && attendanceForm.get('date')?.touched">
+            <i class="fas fa-exclamation-circle"></i>
+            Please select a valid date
+          </div>
+        </div>
+
+        
+        <button type="submit" class="submit-btn" [disabled]="attendanceForm.invalid">
+          <i class="fas fa-save"></i> Create Attendance
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+  

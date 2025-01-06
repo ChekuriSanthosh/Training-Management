@@ -1,0 +1,103 @@
+
+<div class="register-container" style="margin-left: auto; margin-top: 4%;">
+  <div class="toast-container" *ngIf="showToast" style="margin-top: 40px;">
+    <div class="toast" [class.toast-success]="toastType === 'success'" [class.toast-error]="toastType === 'error'">
+      <i class="fas" [class.fa-check-circle]="toastType === 'success'" [class.fa-exclamation-circle]="toastType === 'error'"></i>
+      <span>{{ toastMessage }}</span>
+    </div>
+  </div>
+  <div class="content-wrapper">
+    
+    <div class="header-section">
+      <h1 class="title">
+        <i class="fas fa-user-plus"></i> Student Registration
+      </h1>
+    </div>
+
+    
+    <div class="form-container">
+      <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="registration-form">
+        
+        <div class="form-group">
+          <label for="studentName">
+            <i class="fas fa-user"></i> Student Name
+          </label>
+          <input 
+            type="text" 
+            id="studentName"
+            formControlName="studentName"
+            placeholder="Enter student's full name"
+            [class.error]="registrationForm.get('studentName')?.invalid && registrationForm.get('studentName')?.touched"
+          >
+          <div class="error-message" *ngIf="registrationForm.get('studentName')?.invalid && registrationForm.get('studentName')?.touched">
+            <i class="fas fa-exclamation-circle"></i>
+            Please enter a valid name (minimum 2 characters)
+          </div>
+        </div>
+
+        
+        <div class="form-group">
+          <label for="studentEmail">
+            <i class="fas fa-envelope"></i> Email Address
+          </label>
+          <input 
+            type="email" 
+            id="studentEmail"
+            formControlName="studentEmail"
+            placeholder="Enter student's email"
+            [class.error]="registrationForm.get('studentEmail')?.invalid && registrationForm.get('studentEmail')?.touched"
+          >
+          <div class="error-message" *ngIf="registrationForm.get('studentEmail')?.invalid && registrationForm.get('studentEmail')?.touched">
+            <i class="fas fa-exclamation-circle"></i>
+            Please enter a valid email address
+          </div>
+        </div>
+
+        
+        <div class="form-group">
+          <label for="trainingRoom">
+            <i class="fas fa-door-open"></i> Training Room
+          </label>
+          <select 
+            id="trainingRoom"
+            formControlName="trainingRoom"
+            [class.error]="registrationForm.get('trainingRoom')?.invalid && registrationForm.get('trainingRoom')?.touched"
+          >
+            <option value="">Select Training Room</option>
+            <option *ngFor="let room of trainingRooms" [value]="room">
+              {{ room }}
+            </option>
+          </select>
+          <div class="error-message" *ngIf="registrationForm.get('trainingRoom')?.invalid && registrationForm.get('trainingRoom')?.touched">
+            <i class="fas fa-exclamation-circle"></i>
+            Please select a training room
+          </div>
+        </div>
+
+        
+        <div class="form-group">
+          <label for="totalDuration">
+            <i class="fas fa-clock"></i> Training Duration (Weeks)
+          </label>
+          <input 
+            type="number" 
+            id="totalDuration"
+            formControlName="totalDuration"
+            placeholder="Enter duration in weeks"
+            min="1"
+            [class.error]="registrationForm.get('totalDuration')?.invalid && registrationForm.get('totalDuration')?.touched"
+          >
+          <div class="error-message" *ngIf="registrationForm.get('totalDuration')?.invalid && registrationForm.get('totalDuration')?.touched">
+            <i class="fas fa-exclamation-circle"></i>
+            Please enter a valid duration (minimum 1 week)
+          </div>
+        </div>
+
+        
+        <button type="submit" class="submit-btn" [disabled]="registrationForm.invalid">
+          <i class="fas fa-save"></i> Register Student
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

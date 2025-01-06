@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eduland - Education landing page</title>
+
+  <link rel="shortcut icon" href="./favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@500&family=Poppins:wght@600;700&family=Rubik:wght@400;500&display=swap"
+    rel="stylesheet">
+</head>
+
+<body id="top">
+
+
+  <header class="header" data-header >
+    <div class="container">
+
+      <a href="#" class="logo">
+        <img src="/assets/images/logoo.png" alt="Eduland logo"  style="width: 150px;">
+      </a>
+
+      <button class="menu-open-btn" data-menu-open-btn (click)="toggleMenu()">
+    <i class="fas fa-bars"></i>
+</button>
+
+<div class="overlay" data-overlay (click)="closeMenu()"></div>
+
+
+<nav class="navbar" data-navbar>
+    <button class="menu-close-btn" data-menu-close-btn (click)="closeMenu()">
+        <i class="fas fa-times"></i>
+    </button>
+    <a href="#" class="logo">
+      <img src="/assets/images/logoo.png" alt="skillBuilders logo">
+    </a>
+    
+    <ul class="navbar-list">
+        <li>
+            <a href="#home" class="navbar-link" (click)="scrollToSection('home')">Home</a>
+        </li>
+        <li>
+            <a href="#about" class="navbar-link" (click)="scrollToSection('about')">About</a>
+        </li>
+        <li>
+            <a href="#service" class="navbar-link" (click)="scrollToSection('service')">Service</a>
+        </li>
+        
+        <li>
+            <a href="#contact" class="navbar-link" (click)="scrollToSection('contact')">Contact</a>
+        </li>
+    </ul>
+    <button class="btn btn-secondary" routerLink="/login" >Get Started</button>
+</nav>
+
+    </div>
+  </header>
+
+
+
+
+
+  <main>
+    <article>
+
+
+      <section class="hero" id="home">
+        <div class="container">
+
+          <figure class="hero-banner">
+            <img src="/assets/images/hero-banner.png" alt="A young lady sits, holding a pen and a notebook.">
+          </figure>
+
+          <div class="hero-content">
+
+            <h2 class="h1 hero-title">Transform Your Workforce Through Continous Learning</h2>
+
+            <p class="section-text">
+              Empower your employees with targeted, scalable learning solutions that bridge skill gaps and accelerate professional growth
+            </p>
+
+            <a (click)="scrollToSection('about')"> <button class="btn btn-primary"  >Discover More</button> </a>
+
+          </div>
+
+        </div>
+      </section>
+
+
+
+
+      <section class="about"  id="about">
+        <div class="container" style="margin-top: 25px;">
+
+          <figure class="about-banner">
+
+            <img src="/assets/images/about-banner.png" alt="Eduland students" class="about-img">
+
+            <img src="/assets/images/about-vector.svg" alt="Vector line art" class="vector-line">
+
+
+          </figure>
+
+          <div class="about-content">
+
+            <h2 class="h2 about-title">Strategic Talent Development Transforming Organizational Potential!</h2>
+
+            <p class="section-text">
+              At skillBuilders, we transform campus training by delivering tailored, innovative workforce development solutions that empower organizations to unlock their employees' full potential and drive sustainable career growth across diverse roles and industries."
+            </p>
+
+            
+
+          </div>
+
+        </div>
+      </section>
+
+
+
+<div class="ourservices">
+  
+  
+      <section class="hero" id="service">
+        <h1 style="text-align: center; color:black;"><b>Our Services</b></h1>
+        <div class="container">
+          
+
+          <figure class="hero-banner">
+            <img src="/assets/images/team-removebg.png" alt="A team picture loads here.">
+          </figure>
+
+          <div class="hero-content">
+
+            <h2 class="h1 hero-title">Collaborative Ecosystem: Seamless Team Integration</h2>
+                    <p class="section-text">
+                        Our platform transforms organizational training management by creating an interconnected ecosystem that enables smooth collaboration across professional roles. We've designed an intuitive framework that facilitates effortless data transmission, empowering teams to communicate efficiently and drive meaningful skill development with unprecedented ease.
+                    </p>
+
+            
+          </div>
+
+        </div>
+      </section>
+
+
+
+
+      <section class="about"  id="about">
+        <div class="container" style="margin-top: 25px;">
+
+          <figure class="about-banner">
+
+            <img src="/assets/images/security.jpg" alt="Security image" class="about-img">
+
+
+          </figure>
+
+          <div class="about-content">
+
+            <h2 class="h2 about-title">Robust Security: Precision-Driven Data Protection</h2>
+                    <p class="section-text">
+                        Security is the foundation of our platform. We implement a comprehensive authentication framework that guarantees data confidentiality and role-specific access. Each user experiences a tailored environment where only their authorized information is accessible, ensuring absolute data protection and organizational peace of mind.
+                    </p>
+
+            
+
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+
+
+
+
+
+      <section class="cta" id="getstarted">
+        <div class="container" style="margin-top: 160px;">
+
+          <div class="title-wrapper">
+
+            <h2 class="h2 cta-title">
+              <span>Welcome to the Platform Login Now</span>
+
+              <img src="/assets/images/cta-vector.svg" alt="Vector arrow art" class="vector-line">
+            </h2>
+
+            <button class="btn btn-primary" routerLink="/login">Login Now</button>
+
+          </div>
+
+          <div class="cta-banner"></div>
+
+        </div>
+      </section>
+
+    </article>
+  </main>
+
+
+
+  <footer class="footer">
+
+    <div class="footer-top">
+      <section id="contact">
+      <div class="container">
+
+        <div class="footer-brand">
+
+          <a href="#" class="logo">
+            <img src="/assets/images/logoo.png" alt="skillBuilders logo">
+          </a>
+
+          <p class="footer-text">
+            Professionally scale cross functional human capital and extensive technology.
+          </p>
+
+          <ul class="social-list">
+
+            <li>
+              <a href="http://www.google.com" class="card-social-link" target="_blank">
+                <i class="fa-brands fa-google" style="color:#FFFFFF"></i>
+              </a>
+            </li>
+
+            <li>
+              <a href="http://www.twitter.com" class="card-social-link" target="_blank">
+                <i class="fa-brands fa-twitter" style="color:#FFFFFF"></i>
+              </a>
+            </li>
+
+            <li>
+              <a href="http://www.instagram.com" class="card-social-link" target="_blank">
+                <i class="fa-brands fa-instagram" style="color:#FFFFFF"></i>
+              </a>
+            </li>
+
+            <li>
+              <a href="http://www.linkedin.com" class="card-social-link" target="_blank">
+                <i class="fa-brands fa-linkedin" style="color:#FFFFFF"></i>
+              </a>
+            </li>
+
+          </ul>
+
+        </div>
+        <div class="footer-link-box">
+
+          <ul class="footer-list">
+
+            <li>
+              <p class="footer-link-title">Services</p>
+            </li>
+
+            <li>
+              <p class="footer-link">Progress Tracking</p>
+            </li>
+
+            <li>
+              <p class="footer-link">Resource Allocation</p>
+            </li>
+
+            <li>
+              <p class="footer-link">Department Integration</p>
+            </li>
+
+            <li>
+              <p class="footer-link">Effective Management</p>
+            </li>
+
+          </ul>
+
+          <ul class="footer-list">
+
+            <li>
+              <p class="footer-link-title">Company</p>
+            </li>
+
+            <li>
+              <p class="footer-link">About Us</p>
+            </li>
+
+            <li>
+              <p class="footer-link">Services</p>
+            </li>
+
+            <li>
+              <p class="footer-link">Privacy Policy</p>
+            </li>
+
+            <li>
+              <p class="footer-link">Careers</p>
+            </li>
+
+          </ul>
+
+          <ul class="footer-list">
+
+            <li>
+              <p class="footer-link-title">User Roles</p>
+            </li>
+
+            <li>
+              <p class="footer-link">Administrators</p>
+            </li>
+
+            <li>
+              <p class="footer-link">Trainers</p>
+            </li>
+            
+            <li>
+              <p class="footer-link">Maintainers</p>
+            </li>
+
+            <li>
+              <p class="footer-link">Managers</p>
+            </li>
+
+          </ul>
+
+          <ul class="footer-list">
+
+            <li>
+              <p class="footer-link-title">Contact</p>
+            </li>
+
+            <li class="contact-item">
+              <span>Call : </span>
+
+              <p class="contact-link">+91-7993579937</p>
+            </li>
+
+            <li class="contact-item">
+              <span>Email : </span>
+
+              <a href="mailto:skillBuilders@gmail.com" class="contact-link">SkillBuilders&#64;gmail.com</a>
+            </li>
+
+            <li class="contact-item">
+              <span>Address : </span>
+
+              <p class="contact-link">
+                Trivandrum Kerela, IND
+              </p>
+            </li>
+
+          </ul>
+
+        </div>
+
+      </div>
+    </section>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container">
+        <p class="copyright">
+          &copy; 2024 SkillBuilders. All right reserved
+        </p>
+      </div>
+    </div>
+
+  </footer>
+
+
+
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+</body>
+
+</html>

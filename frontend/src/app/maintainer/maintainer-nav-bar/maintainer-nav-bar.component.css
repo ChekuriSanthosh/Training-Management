@@ -1,0 +1,178 @@
+
+.sidebar {
+  min-width: 250px;
+  max-width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  z-index: 1000;
+  background-color: #f8f9fa;
+  transition: all 0.3s ease;
+  overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo-details {
+  height: 60px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  padding: 20px;
+  background: #2c3e50;
+  color: white;
+}
+
+.logo-details i {
+  font-size: 24px;
+  margin-right: 10px;
+}
+
+.logo_name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.nav-links li {
+  position: relative;
+}
+
+.nav-links li a {
+  display: flex;
+  align-items: center;
+  padding: 12px 20px;
+  color: #2c3e50;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.nav-links li a:hover {
+  background: #e9ecef;
+}
+
+.nav-links li a i {
+  min-width: 30px;
+  font-size: 16px;
+}
+
+
+.sub-menu {
+  display: none;
+  background: rgba(0, 0, 0, 0.02);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+
+li.showMenu .sub-menu {
+  display: block;
+}
+
+.sub-menu li {
+  padding-left: 20px;
+  margin: 0;
+}
+
+.sub-menu li a {
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #2c3e50;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.sub-menu li a:hover {
+  background: #e9ecef;
+  color: #3498db;
+}
+
+.icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  color: #2c3e50;
+  cursor: pointer;
+}
+
+.icon-link:hover {
+  background: #e9ecef;
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+li.showMenu .arrow {
+  transform: rotate(180deg);
+}
+
+
+.active {
+  background: #3498db !important;
+  color: white !important;
+}
+
+.active i {
+  color: white !important;
+}
+
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1040;
+  background-color: white !important;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-nav .nav-link {
+  cursor: pointer;
+}
+
+
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.show {
+    transform: translateX(0);
+  }
+}
+
+
+
+
+.dropdown-menu {
+  position: absolute;
+  right: 0;
+  border: none;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  margin-top: 10px;
+  min-width: 200px;
+}
+
+.dropdown-item {
+  padding: 0.8rem 1.5rem;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: rgba(52, 152, 219, 0.1);
+  color: #3498db;
+}

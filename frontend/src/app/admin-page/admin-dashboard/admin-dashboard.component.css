@@ -1,0 +1,211 @@
+
+
+.dashboard-container {
+    padding: 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+    background-color: #f8f9fa;
+  }
+  
+  
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .stat-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease;
+  }
+  
+  .stat-card:hover {
+    transform: translateY(-2px);
+  }
+  
+  .stat-icon {
+    font-size: 2.5rem;
+    margin-right: 20px;
+  }
+  
+  .stat-content h3 {
+    margin: 0;
+    font-size: 1rem;
+    color: #666;
+  }
+  
+  .stat-content p {
+    margin: 5px 0 0;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  
+  .charts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .chart-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .chart-card h3 {
+    margin: 0 0 20px;
+    color: #333;
+    text-align: center;
+  }
+  
+  .room-selector {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .room-selector select {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    width: 200px;
+    background-color: white;
+    cursor: pointer;
+    transition: border-color 0.2s ease;
+  }
+  
+  .room-selector select:hover {
+    border-color: #aaa;
+  }
+  
+  .chart-container {
+    position: relative;
+    height: 300px;
+  }
+  
+  .marks-chart {
+    margin-bottom: 30px;
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  
+  .trainer-card {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  }
+  
+  .trainer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 20px;
+  }
+  
+  .trainer-item {
+    display: flex;
+    align-items: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    transition: transform 0.2s ease;
+  }
+  
+  .trainer-item:hover {
+    transform: translateY(-2px);
+  }
+  
+  .trainer-icon {
+    font-size: 2rem;
+    margin-right: 15px;
+  }
+  
+  .trainer-info h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .trainer-info p {
+    margin: 5px 0 0;
+    font-size: 0.9rem;
+    color: #666;
+  }
+  
+  
+  @media (max-width: 768px) {
+    .dashboard-container {
+      padding: 15px;
+    }
+  
+    .charts-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .chart-container {
+      height: 250px;
+    }
+  
+    .trainer-grid {
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    }
+  
+    .stat-card {
+      padding: 15px;
+    }
+  
+    .stat-icon {
+      font-size: 2rem;
+    }
+  
+    .room-selector select {
+      width: 100%;
+      max-width: 200px;
+    }
+  }
+  
+
+  
+  .chart-container {
+    position: relative;
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .no-data-message {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    width: 100%;
+    animation: fadeIn 0.3s ease-in-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }

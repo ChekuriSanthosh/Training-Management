@@ -1,0 +1,100 @@
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <img src="assets/images/logoo.png" alt="UST Logo" class="logo" style="left: 0%; width: 130px; height: auto;"/>
+  <div class="container-fluid">
+    
+    <button class="navbar-toggler" type="button" (click)="toggleSidebar()" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <ul class="navbar-nav ms-auto">
+      
+      <li class="nav-item dropdown" (click)="toggleDropdown($event)">
+        <a class="nav-link dropdown-toggle d-flex align-items-center"
+           id="navbarDropdownMenuLink"
+           aria-expanded="false">
+          <img src="/assets/images/profile.png"
+               class="rounded-circle profile-icon"
+               height="40"
+               alt="Profile Icon"
+               loading="lazy"/>
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" [ngClass]="{'show': dropdownOpen}">
+          <li>
+            <a class="dropdown-item" (click)="Logout()">
+              <i class="fas fa-sign-out-alt me-2"></i>Logout</a>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+<nav id="sidebarMenu" class="sidebar" [class.show]="isSidebarOpen">
+  <div class="list-group list-group-flush">
+    
+    <a routerLink="admin-dashboard" 
+       routerLinkActive="active" 
+       class="list-group-item list-group-item-action py-2 ripple">
+      <i class="fas fa-tachometer-alt fa-fw me-3"></i>
+      <span>Dashboard</span>
+    </a>
+
+    
+    <a routerLink="add-maintainer" 
+       routerLinkActive="active" 
+       class="list-group-item list-group-item-action py-2 ripple">
+      <i class="fas fa-plus fa-fw me-3"></i>
+      <span>Add New Maintainers</span>
+    </a>
+
+    
+    <a routerLink="admin-post-manager" 
+       routerLinkActive="active" 
+       class="list-group-item list-group-item-action py-2 ripple">
+      <i class="fas fa-plus fa-fw me-3"></i>
+      <span>Add New Manager</span>
+    </a>
+
+    
+    <a routerLink="admin-set-training-room" 
+       routerLinkActive="active" 
+       class="list-group-item list-group-item-action py-2 ripple">
+      <i class="fas fa-cogs fa-fw me-3"></i>
+      <span>Set Training Rooms</span>
+    </a>
+
+    
+    <a routerLink="admin-view-students" 
+       routerLinkActive="active" 
+       class="list-group-item list-group-item-action py-2 ripple">
+      <i class="fas fa-users fa-fw me-3"></i>
+      <span>View All Students</span>
+    </a>
+
+    
+    <a routerLink="admin-view-all-trainers" 
+       routerLinkActive="active" 
+       class="list-group-item list-group-item-action py-2 ripple">
+      <i class="fas fa-chalkboard-teacher fa-fw me-3"></i>
+      <span>View All Trainers</span>
+    </a>
+
+    
+    <a routerLink="admin-view-all-maintainers" 
+       routerLinkActive="active" 
+       class="list-group-item list-group-item-action py-2 ripple">
+      <i class="fas fa-users-cog fa-fw me-3"></i>
+      <span>View All Maintainers</span>
+    </a>
+
+    
+    <a routerLink="admin-view-managers" 
+       routerLinkActive="active" 
+       class="list-group-item list-group-item-action py-2 ripple">
+      <i class="fas fa-users-cog fa-fw me-3"></i>
+      <span>View All Managers</span>
+    </a>
+  </div>
+</nav>
+

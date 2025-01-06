@@ -1,0 +1,82 @@
+<div class="container">
+    
+    <div *ngIf="loading" class="loading-spinner">
+      <div class="spinner"></div>
+      <p>Loading student details...</p>
+    </div>
+  
+    
+    <div *ngIf="error" class="error-message">
+      <p>{{ error }}</p>
+    </div>
+  
+    
+    <div *ngIf="student && !loading" class="student-card">
+      <div class="card-header">
+        <h2>Student Details</h2>
+        <button *ngIf="!isEditing" (click)="startEditing()" class="edit-btn">
+          <i class="fas fa-edit"></i> Edit Name
+        </button>
+      </div>
+  
+      <div class="card-body">
+        
+        <div class="detail-row">
+          <span class="label">Student ID:</span>
+          <span class="value">{{ student.studentId }}</span>
+        </div>
+  
+        
+        <div class="detail-row">
+          <span class="label">Name:</span>
+          <div *ngIf="!isEditing" class="value">{{ student.studentName }}</div>
+          <div *ngIf="isEditing" class="edit-field">
+            <input 
+              type="text" 
+              [(ngModel)]="updatedName" 
+              class="name-input"
+              placeholder="Enter new name"
+            >
+            <div class="edit-actions">
+              <button (click)="updateName()" class="save-btn">
+                <i class="fas fa-check"></i> Save
+              </button>
+              <button (click)="cancelEdit()" class="cancel-btn">
+                <i class="fas fa-times"></i> Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+  
+        
+        <div class="detail-row">
+          <span class="label">Email:</span>
+          <span class="value">{{ student.studentEmail }}</span>
+        </div>
+  
+        
+        <div class="detail-row">
+          <span class="label">Training Room:</span>
+          <span class="value">{{ student.trainingRoom }}</span>
+        </div>
+  
+        
+        <div class="detail-row">
+          <span class="label">Total Duration:</span>
+          <span class="value">{{ student.totalduration }} weeks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="chat-wrapper" [class.open]="isChatOpen">
+    <button class="chat-bubble" (click)="toggleChat()" [class.active]="isChatOpen">
+      <i class="fas" [class.fa-comments]="!isChatOpen" [class.fa-times]="isChatOpen"></i>
+    </button>
+
+    
+    <div class="chat-modal" [class.open]="isChatOpen">
+      <app-student-chatbot></app-student-chatbot>
+    </div>
+  </div>

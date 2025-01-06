@@ -1,0 +1,73 @@
+
+<main style="margin-left: auto;">
+  <div class="students-container">
+    <div class="content-wrapper">
+      <div class="header-section">
+        <h1 class="title">Student Management</h1>
+        <select 
+          class="room-selector"
+          [(ngModel)]="selectedTrainingRoom"
+          (change)="loadStudentsByTrainingRoom($event)"
+        >
+          <option value="">Select Training Room</option>
+          <option *ngFor="let room of trainingRooms" [value]="room">
+            {{ room }}
+          </option>
+        </select>
+      </div>
+
+      
+      <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading students...</p>
+      </div>
+
+      <div *ngIf="errorMessage" class="error-state">
+        <span class="error-icon">⚠️</span>
+        <p>{{ errorMessage }}</p>
+      </div>
+
+    
+      <div *ngIf="!loading && !errorMessage && (!students.length || !trainingRooms.length)" 
+           [class]="!trainingRooms.length ? 'no-rooms-state' : 'empty-state'">
+        <div class="state-content">
+          <h2 class="empty-title">
+            {{ !trainingRooms.length ? 'No Training Rooms Available' : 'No Students Found' }}
+          </h2>
+          <p class="empty-description">
+            {{ !trainingRooms.length 
+              ? 'There are currently no training rooms configured in the system. Please contact the administrator to set up training rooms.'
+              : 'There are no students assigned to this training room yet. Students will appear here once they are assigned.'
+            }}
+          </p>
+        </div>
+      </div>
+
+      
+      <div *ngIf="!loading && !errorMessage && students.length" class="students-table-container">
+        <table class="students-table">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Training Room</th>
+              <th>Duration (Weeks)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of students">
+              <td data-label="ID">{{ student.studentId }}</td>
+              <td data-label="Name">{{ student.studentName }}</td>
+              <td data-label="Email">{{ student.studentEmail }}</td>
+              <td data-label="Training Room">{{ student.trainingRoom }}</td>
+              <td data-label="Duration">{{ student.totalduration }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</main>
+
+  

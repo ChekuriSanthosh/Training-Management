@@ -1,0 +1,31 @@
+<main class="d-flex justify-content-center align-items-center min-vh-100 bg-light">
+  <div class="container pt-4">
+    <div class="managers-container">
+      <h2 class="text-center mb-4">Manager Details</h2>
+      <div class="managers-grid">
+        <div *ngFor="let manager of managers" class="manager-card">
+          <div class="manager-card-content">
+            <h3 class="manager-name">
+              <i class="fas fa-user-tie"></i> {{ manager.managerName }}
+            </h3>
+            <div class="manager-details">
+              <p><i class="fas fa-id-badge"></i> <strong>Manager ID:</strong> {{ manager.managerId }}</p>
+              <p><i class="fas fa-user-circle"></i> <strong>Account Type:</strong> {{ manager.accountType }}</p>
+              <p><i class="fas fa-envelope"></i> <strong>Email:</strong> {{ manager.manageremail || 'N/A' }}</p>
+              <div class="request-count">
+                <span class="badge">
+                  <i class="fas fa-check-circle"></i> Requests: {{ manager.createdRequests.length }}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div *ngIf="managers.length === 0" class="no-managers">
+        No managers found.
+      </div>
+    </div>
+  </div>
+</main>

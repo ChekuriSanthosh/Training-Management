@@ -1,0 +1,67 @@
+<div class="post-marks-container" style="margin-left: auto; margin-top: 4%;">
+  <div class="content-wrapper">
+    
+    <div class="header-section">
+      <h1 class="title">
+        <i class="fas fa-edit"></i> Post Weekly Marks
+      </h1>
+      <div class="room-selector-wrapper">
+        <select 
+          class="room-selector"
+          [(ngModel)]="selectedRoom"
+          (change)="onRoomChange($event)"
+        >
+          <option value="">Select Training Room</option>
+          <option *ngFor="let room of availableRooms" [value]="room">
+            {{ room }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    
+    <div class="marks-container" *ngIf="students.length > 0">
+      <div class="table-wrapper">
+        <table class="marks-table">
+          <thead>
+            <tr>
+              <th class="fixed-column name-column">
+                <i class="fas fa-user"></i> Student Name
+              </th>
+              <th *ngFor="let week of weeks">
+                <i class="fas fa-calendar-week"></i> Week {{ week }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of students">
+              <td class="fixed-column name-column">{{ student.studentName }}</td>
+              <td *ngFor="let week of weeks" class="marks-input-cell">
+                <input 
+                  type="number" 
+                  class="marks-input"
+                  [value]="getInitialMarks(student, week)"
+                  (input)="onMarksChange(student.studentId, week, $event)"
+                  min="0"
+                  max="100"
+                  placeholder="Enter marks"
+                >
+                <div class="input-tooltip">Enter marks (0-100)</div>
+                <div class="save-indicator"></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    
+    <div *ngIf="students.length === 0" class="empty-state">
+      <div class="empty-state-content">
+        <i class="fas fa-users-slash empty-icon"></i>
+        <h2>No Students Found</h2>
+        <p>There are currently no students assigned to {{ selectedRoom || 'this room' }}.</p>
+      </div>
+    </div>
+  </div>
+</div>

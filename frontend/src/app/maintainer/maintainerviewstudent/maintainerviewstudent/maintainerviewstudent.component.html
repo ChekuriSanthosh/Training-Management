@@ -1,0 +1,59 @@
+<div class="student-view-container">
+  <div class="content-wrapper">
+    
+    <div class="header-section">
+      <h1 class="title">
+        <i class="fas fa-users"></i> Student Management
+      </h1>
+      <div class="room-selector-wrapper">
+        <select 
+          class="room-selector"
+          [(ngModel)]="selectedRoom"
+          (change)="onRoomChange($event)"
+        >
+          <option value="">Select Training Room</option>
+          <option *ngFor="let room of availableRooms" [value]="room">
+            {{ room }}
+          </option>
+        </select>
+      </div>
+    </div>
+
+    
+    <div *ngIf="isLoading" class="loading-state">
+      <div class="spinner"></div>
+      <p>Loading students...</p>
+    </div>
+
+    
+    <div *ngIf="!isLoading && students.length > 0" class="table-container">
+      <table class="student-table">
+        <thead>
+          <tr>
+            <th><i class="fas fa-id-card"></i> Student ID</th>
+            <th><i class="fas fa-user"></i> Name</th>
+            <th><i class="fas fa-envelope"></i> Email</th>
+            <th><i class="fas fa-door-open"></i> Training Room</th>
+            <th><i class="fas fa-clock"></i> Duration (Weeks)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of students">
+            <td>{{ student.studentId }}</td>
+            <td>{{ student.studentName }}</td>
+            <td>{{ student.studentEmail }}</td>
+            <td>{{ student.trainingRoom }}</td>
+            <td>{{ student.totalduration }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    
+    <div *ngIf="!isLoading && students.length === 0" class="empty-state">
+      <i class="fas fa-user-graduate empty-icon"></i>
+      <h2>No Students Found</h2>
+      <p>There are currently no students assigned to {{ selectedRoom || 'this room' }}.</p>
+    </div>
+  </div>
+</div>

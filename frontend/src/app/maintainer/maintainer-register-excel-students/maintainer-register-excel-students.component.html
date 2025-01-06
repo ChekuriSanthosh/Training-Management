@@ -1,0 +1,99 @@
+
+<div class="excel-upload-container" style="margin-top: 100px;">
+  <div class="upload-card">
+    <div class="card-header">
+      <h2>Register Students via Excel</h2>
+      <p class="subtitle">Upload Excel/CSV file with student details</p>
+    </div>
+
+    <div class="upload-section">
+      <div class="file-drop-area" 
+           [class.dragging]="isDragging" 
+           (dragover)="onDragOver($event)" 
+           (dragleave)="onDragLeave()" 
+           (drop)="onDrop($event)">
+        <input type="file" 
+               #fileInput
+               (change)="onFileChange($event)" 
+               accept=".xlsx,.xls,.csv" 
+               class="file-input">
+        <div class="upload-content">
+          <i class="fas fa-file-excel"></i>
+          <p>Drag & Drop your Excel file here or</p>
+          <button class="browse-btn" (click)="fileInput.click()">Browse Files</button>
+          <p class="file-hint">Supported formats: .xlsx, .xls, .csv</p>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="student-table-container" *ngIf="students.length > 0">
+      <h3>Extracted Students</h3>
+      <div class="table-wrapper">
+        <table class="student-table">
+          <thead>
+            <tr>
+              <th>
+                <input type="checkbox" 
+                       [checked]="allSelected" 
+                       (change)="toggleAll()">
+              </th>
+              <th>Name</th>
+              <th>Email</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let student of students">
+              <td>
+                <input type="checkbox" 
+                       [(ngModel)]="student.isSelected">
+              </td>
+              <td>{{student.studentName}}</td>
+              <td>{{student.studentEmail}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <button class="register-btn" 
+              (click)="registerSelectedStudents()" 
+              [disabled]="!hasSelectedStudents()">
+        Register Selected Students
+      </button>
+    </div>
+
+    
+    <div class="loading-spinner" *ngIf="isUploading">
+      <div class="spinner"></div>
+      <p>Processing students...</p>
+    </div>
+
+    
+    <div class="registration-status" *ngIf="registrationStatus.length > 0">
+      <h3>Registration Status</h3>
+      <div class="status-list">
+        <div class="status-item" 
+             *ngFor="let status of registrationStatus"
+             [ngClass]="{
+               'success': status.status === 'success',
+               'error': status.status === 'error'
+             }">
+          <div class="status-icon">
+            <i [class]="status.status === 'success' ? 'fas fa-check-circle' : 'fas fa-times-circle'"></i>
+          </div>
+          <div class="status-details">
+            <p class="student-name">{{status.student.studentName}}</p>
+            <p class="student-email">{{status.student.studentEmail}}</p>
+          </div>
+          <div class="status-message">
+            {{status.message}}
+          </div>
+        </div>
+      </div>
+      <button class="clear-btn" 
+              (click)="clearResults()" 
+              *ngIf="registrationStatus.length > 0">
+        Clear Results
+      </button>
+    </div>
+  </div>
+</div>

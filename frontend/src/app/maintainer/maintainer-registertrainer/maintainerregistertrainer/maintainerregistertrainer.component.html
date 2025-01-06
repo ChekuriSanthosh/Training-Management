@@ -1,0 +1,97 @@
+
+<div class="trainer-register-container" style="margin-left: auto; margin-top: 4%;">
+  
+  <div class="toast-container" *ngIf="showToast" style="margin-top: 40px;">
+    <div class="toast" [class.toast-success]="toastType === 'success'" [class.toast-error]="toastType === 'error'">
+      <i class="fas" [class.fa-check-circle]="toastType === 'success'" [class.fa-exclamation-circle]="toastType === 'error'"></i>
+      <span>{{ toastMessage }}</span>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    
+    <div class="header-section">
+      <h1 class="title">
+        <i class="fas fa-chalkboard-teacher"></i> Trainer Registration
+      </h1>
+    </div>
+
+    
+    <div class="form-container">
+      <form [formGroup]="trainerForm" (ngSubmit)="onSubmit()" class="registration-form">
+        
+        <div class="form-group">
+          <label for="trainerName">
+            <i class="fas fa-user"></i> Trainer Name
+          </label>
+          <input 
+            type="text" 
+            id="trainerName"
+            formControlName="trainerName"
+            placeholder="Enter trainer's full name"
+            [class.error]="trainerForm.get('trainerName')?.invalid && trainerForm.get('trainerName')?.touched"
+          >
+          <div class="error-message" *ngIf="trainerForm.get('trainerName')?.invalid && trainerForm.get('trainerName')?.touched">
+            <i class="fas fa-exclamation-circle"></i>
+            Please enter trainer's name
+          </div>
+        </div>
+
+        
+        <div class="form-group">
+          <label for="trainerEmail">
+            <i class="fas fa-envelope"></i> Email Address
+          </label>
+          <input 
+            type="email" 
+            id="trainerEmail"
+            formControlName="trainerEmail"
+            placeholder="Enter trainer's email"
+            [class.error]="trainerForm.get('trainerEmail')?.invalid && trainerForm.get('trainerEmail')?.touched"
+          >
+          <div class="error-message" *ngIf="trainerForm.get('trainerEmail')?.invalid && trainerForm.get('trainerEmail')?.touched">
+            <i class="fas fa-exclamation-circle"></i>
+            Please enter a valid email address
+          </div>
+        </div>
+
+        
+        <div class="skills-section">
+          <label>
+            <i class="fas fa-tools"></i> Skills
+          </label>
+          <div class="skills-input-group">
+            <input 
+              type="text" 
+              [(ngModel)]="newSkill" 
+              [ngModelOptions]="{standalone: true}"
+              placeholder="Add a skill"
+              class="skill-input"
+            >
+            <button type="button" class="add-skill-btn" (click)="addSkill()" [disabled]="!newSkill">
+              <i class="fas fa-plus"></i>
+            </button>
+          </div>
+
+          
+          <div class="skills-tags" *ngIf="skills.length > 0">
+            <div class="skill-tag" *ngFor="let skill of skills">
+              {{ skill }}
+              <button type="button" class="remove-skill-btn" (click)="removeSkill(skill)">
+                <i class="fas fa-times"></i>
+              </button>
+            </div>
+          </div>
+          <div class="skills-hint" *ngIf="skills.length === 0">
+            No skills added yet
+          </div>
+        </div>
+
+        
+        <button type="submit" class="submit-btn" [disabled]="trainerForm.invalid || skills.length === 0">
+          <i class="fas fa-user-plus"></i> Register Trainer
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

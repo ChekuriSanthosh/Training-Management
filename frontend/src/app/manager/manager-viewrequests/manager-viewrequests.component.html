@@ -1,0 +1,84 @@
+
+  <div class="container">
+    
+    <div *ngIf="errorMessage" class="alert alert-danger alert-dismissible fade show mb-5" role="alert">
+      <strong>Error: </strong>{{ errorMessage }}
+    </div>
+
+    
+    <div *ngIf="!isLoading && !errorMessage">
+      <h1 class="text-center display-4 mb-5 text-dark font-weight-bold">
+        Your Training Requests
+      </h1>
+
+      
+      <div *ngIf="requests.length === 0" class="text-center p-5 bg-white rounded shadow-lg">
+        <svg class="mx-auto mb-4" height="64" width="64" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+        </svg>
+        <p class="h4 text-muted">No requests created yet</p>
+      </div>
+
+      
+      <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-6" style="margin-right: 10%;">
+        <div *ngFor="let request of requests" class="col">
+          
+          <div class="card shadow-sm border-light rounded">
+            <div class="card-body">
+              
+              <div class="d-flex justify-content-between">
+                <span class="badge {{ getStatusColor(request.status) }} text-uppercase">
+                  {{ formatField(request.status) }}
+                </span>
+                <span class="text-muted small">
+                  Request #{{ formatField(request.requestId) }}
+                </span>
+              </div>
+
+              
+              <div class="d-flex justify-content-between mt-3">
+                <p class="text-muted"><b>Admin Name</b></p>
+                <p class="font-weight-bold">{{ formatField(request.adminName) }}</p>
+              </div>
+
+              
+              <div class="mt-4">
+                <h5 class="card-title">Skills Required</h5>
+                <div class="d-flex flex-wrap gap-2">
+                  <span *ngFor="let skill of request.skills" class="badge badge-info text-white">
+                    {{ skill }}
+                  </span>
+                </div>
+              </div>
+
+              
+              <div class="mt-4 p-3 border rounded" style="background-color: #f1f8ff;">
+                <div class="row">
+                  <div class="col-6">
+                    <p class="text-muted small">Number of Trainees</p>
+                    <p class="font-weight-bold">{{ formatField(request.requiredTrainees) }}</p>
+                  </div>
+                  <div class="col-6">
+                    <p class="text-muted small">Account Type</p>
+                    <p class="font-weight-bold">{{ formatField(request.accountType) }}</p>
+                  </div>
+                </div>
+              </div>
+
+              
+              <div class="mt-4">
+                <p class="text-muted"><b>Admin Message</b></p>
+                <p *ngIf="request.adminMessage" class="font-italic text-muted">
+                  "{{ formatField(request.adminMessage) }}"
+                </p>
+                <p *ngIf="!request.adminMessage" class="font-italic text-muted">
+                  Not Updated
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+

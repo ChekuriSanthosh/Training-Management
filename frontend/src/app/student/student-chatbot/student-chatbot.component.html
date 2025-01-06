@@ -1,0 +1,46 @@
+
+<div class="chat-container">
+    <div class="chat-header">
+      <h2>UST Learning Assistant</h2>
+      <p class="subtitle">Ask me anything about your training program!</p>
+    </div>
+  
+    <div class="messages-container" #scrollContainer>
+      <div *ngFor="let message of messages" 
+           [class]="'message-wrapper ' + message.role">
+        <div class="message">
+          <div class="message-content">{{ message.content }}</div>
+          <div class="message-timestamp">{{ formatTime(message.timestamp) }}</div>
+        </div>
+      </div>
+  
+      
+      <div *ngIf="isLoading" class="message-wrapper model">
+        <div class="message loading">
+          <div class="typing-indicator">
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+        </div>
+      </div>
+  
+      
+      <div *ngIf="error" class="error-message">
+        {{ error }}
+      </div>
+    </div>
+  
+    <div class="input-container">
+      <input type="text" 
+             [(ngModel)]="newMessage" 
+             (keyup.enter)="sendMessage()"
+             placeholder="Type your message..."
+             [disabled]="isLoading">
+      <button (click)="sendMessage()" 
+              [disabled]="isLoading || !newMessage.trim()">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+  </div>
+  

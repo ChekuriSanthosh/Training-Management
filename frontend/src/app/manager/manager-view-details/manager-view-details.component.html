@@ -1,0 +1,93 @@
+<div class="container pt-4">
+  <div *ngIf="managerDetails" class="card shadow-sm border-light rounded-lg">
+    
+    <div *ngIf="!isEditMode" class="card-body">
+      <div class="text-center mb-4">
+        
+        <div class="icon-container mb-3">
+          <img 
+            src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-1024.png" 
+            alt="Manager Avatar" 
+            class="profile-icon"
+          >
+        </div>
+        <h2 class="h4 text-primary">{{ managerDetails.managerName }}</h2>
+
+        <div class="mb-4">
+          <div class="d-flex justify-content-between">
+            <strong>Name:</strong>
+            <span class="text-muted">{{ managerDetails.managerName }}</span>
+          </div>
+          <div class="d-flex justify-content-between">
+            <strong>Email:</strong>
+            <span class="text-muted">{{ managerDetails.manageremail }}</span>
+          </div>
+          <div class="d-flex justify-content-between">
+            <strong>Account Type:</strong>
+            <span class="text-muted">{{ managerDetails.accountType }}</span>
+          </div>
+        </div>
+
+        <button 
+          (click)="toggleEditMode()" 
+          class="btn btn-outline-primary"
+        >
+          <i class="fas fa-edit"></i> Edit Profile
+        </button>
+      </div>
+    </div>
+
+    
+    <form *ngIf="isEditMode" [formGroup]="managerForm" (ngSubmit)="updateManagerDetails()" class="card-body">
+      <div class="text-center mb-4">
+        
+        <div class="icon-container mb-3">
+          <img 
+            src="https://cdn1.iconfinder.com/data/icons/user-pictures/100/male3-1024.png" 
+            alt="Manager Avatar" 
+            class="profile-icon"
+          >
+        </div>
+        <h2 class="h4 text-secondary">Edit Profile</h2>
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Manager Name</label>
+        <input 
+          type="text" 
+          formControlName="managerName"
+          class="form-control"
+        >
+        <div *ngIf="managerForm.get('managerName')?.invalid && managerForm.get('managerName')?.touched" class="text-danger mt-2">
+          Name is required and must be at least 2 characters long.
+        </div>
+      </div>
+
+      <div class="form-group mb-3">
+        <label class="form-label">Account Type</label>
+        <input 
+          type="text" 
+          formControlName="accountType"
+          class="form-control"
+        >
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <button 
+          type="button" 
+          (click)="toggleEditMode()"
+          class="btn btn-outline-secondary"
+        >
+          <i class="fas fa-times"></i> Cancel
+        </button>
+        <button 
+          type="submit" 
+          [disabled]="managerForm.invalid"
+          class="btn btn-primary"
+        >
+          <i class="fas fa-save"></i> Save Changes
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,131 @@
+
+.container {
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
+
+
+.card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 500px; 
+  width: 100%; 
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.card-body {
+  padding: 0;
+}
+
+
+.icon-container {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #007bff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.manager-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 20px;
+}
+
+.manager-details div {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 0;
+}
+
+.manager-details strong {
+  font-weight: bold;
+}
+
+
+.btn-outline-primary,
+.btn-outline-secondary,
+.btn-primary {
+  width: 100%;
+  padding: 10px 20px;
+  font-size: 1rem;
+}
+
+.btn-outline-primary, .btn-outline-secondary, .btn-primary {
+  transition: background-color 0.3s ease;
+}
+
+.btn-outline-primary:hover, .btn-outline-secondary:hover, .btn-primary:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+
+@media (max-width: 768px) {
+  .card {
+    padding: 15px;
+    max-width: 100%; 
+  }
+
+  .icon-container {
+    width: 70px;
+    height: 70px;
+  }
+
+  .profile-icon {
+    object-fit: cover;
+  }
+
+  .manager-name {
+    font-size: 1.5rem;
+  }
+
+  .h4 {
+    font-size: 1.2rem;
+  }
+
+  .manager-details div {
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .manager-details strong {
+    font-weight: normal;
+  }
+
+  .d-flex {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .manager-card-content {
+    text-align: left; 
+  }
+
+  .manager-details {
+    padding: 0 10px;
+  }
+}

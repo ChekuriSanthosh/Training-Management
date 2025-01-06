@@ -1,0 +1,342 @@
+.attendance-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .attendance-content {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  h2 {
+    color: #2c3e50;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+  
+  .week-navigation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  .nav-button {
+    background: #3498db;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  
+  .nav-button:disabled {
+    background: #bdc3c7;
+    cursor: not-allowed;
+  }
+  
+  .nav-button:not(:disabled):hover {
+    background: #2980b9;
+    transform: scale(1.1);
+  }
+  
+  .week-indicator {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #2c3e50;
+  }
+  
+  .table-responsive {
+    overflow-x: auto;
+    margin-bottom: 2rem;
+  }
+  
+  .attendance-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+  }
+  
+  .attendance-table th,
+  .attendance-table td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+  }
+  
+  .attendance-table th {
+    background: #2c3e50;
+    color: white;
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+  }
+  
+  .attendance-cell {
+    padding: 0.5rem;
+  }
+  
+  .attendance-status {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    font-weight: bold;
+    background: #f5f6fa;
+    transition: all 0.3s ease;
+  }
+  
+  .attendance-status.present {
+    background: #4CAF50;
+    color: white;
+  }
+  
+  .attendance-status.absent {
+    background: #e74c3c;
+    color: white;
+  }
+  
+  
+  .current-student {
+    background-color: rgba(52, 152, 219, 0.1);
+  }
+  
+  .current-student td {
+    border-bottom: 2px solid #3498db;
+  }
+  
+  
+  .percentage-cell {
+    width: 120px;
+  }
+  
+  .percentage-indicator {
+    padding: 0.5rem;
+    border-radius: 20px;
+    background: #f5f6fa;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  
+  .attendance-legend {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+  }
+  
+  .attendance-legend h3 {
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+  }
+  
+  .legend-items {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+  
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .loading-state {
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  .spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #3498db;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 1rem;
+  }
+  
+  .error-message {
+    background: #ff6b6b;
+    color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    text-align: center;
+  }
+  
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+
+  @media (max-width: 768px) {
+    .attendance-container {
+      padding: 1rem;
+    }
+  
+    .attendance-content {
+      padding: 1rem;
+    }
+  
+    .attendance-table th,
+    .attendance-table td {
+      padding: 0.5rem;
+      font-size: 0.9rem;
+    }
+  
+    .attendance-status {
+      width: 25px;
+      height: 25px;
+      font-size: 0.8rem;
+    }
+  
+    .week-navigation {
+      flex-wrap: wrap;
+    }
+  
+    .legend-items {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
+
+.table-responsive {
+    height: 600px; 
+    overflow-y: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: white;
+    position: relative;
+  }
+  
+  
+  .table-responsive::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  .table-responsive::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+  
+  .table-responsive::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 4px;
+  }
+  
+  .table-responsive::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
+  }
+  
+  
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+  }
+  
+  thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  
+  th {
+    background: #2c3e50;
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  
+  td {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    background: white;
+  }
+  
+  tbody tr {
+    transition: all 0.3s ease;
+  }
+  
+  tbody tr:hover {
+    background-color: rgba(52, 152, 219, 0.05);
+    transform: translateX(5px);
+  }
+  
+  .current-student td {
+    background-color: rgba(52, 152, 219, 0.1);
+  }
+  
+  
+  .loading-row {
+    animation: pulse 1.5s infinite;
+  }
+  
+  @keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+  }
+
+  
+.table-bottom-loader {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-top: 1px solid #eee;
+  }
+  
+  .loader-dots {
+    display: inline-flex;
+    gap: 0.5rem;
+  }
+  
+  .loader-dots span {
+    width: 8px;
+    height: 8px;
+    background: #3498db;
+    border-radius: 50%;
+    animation: bounce 0.5s infinite alternate;
+  }
+  
+  .loader-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .loader-dots span:nth-child(3) { animation-delay: 0.4s; }
+  
+  @keyframes bounce {
+    to { transform: translateY(-4px); }
+  }

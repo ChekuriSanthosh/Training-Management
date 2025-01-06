@@ -1,0 +1,114 @@
+<div class="pdf-upload-container" style="margin-left: auto; margin-top: 4%;">
+  
+  <div class="toast-container" *ngIf="showToast" style="margin-top: 40px;">
+    <div class="toast" [class.toast-success]="toastType === 'success'" [class.toast-error]="toastType === 'error'">
+      <i class="fas" [class.fa-check-circle]="toastType === 'success'" [class.fa-exclamation-circle]="toastType === 'error'"></i>
+      <span>{{ toastMessage }}</span>
+    </div>
+  </div>
+
+  <div class="content-wrapper">
+    
+    <div class="header-section">
+      <h1 class="title">
+        <i class="fas fa-file-pdf"></i> Trainer Timetable Management
+      </h1>
+    </div>
+
+    
+    <div class="table-container">
+      <h2 class="section-title">
+        <i class="fas fa-users"></i> Trainer Timetables
+      </h2>
+
+      <div class="table-wrapper">
+        <table class="trainers-table">
+          <thead>
+            <tr>
+              <th><i class="fas fa-user"></i> Trainer Name</th>
+              <th><i class="fas fa-door-open"></i> Room</th>
+              <th><i class="fas fa-file-pdf"></i> Timetable</th>
+              <th><i class="fas fa-cogs"></i> Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let trainer of trainers">
+              <td>{{ trainer.trainerName }}</td>
+              <td>
+                <span class="room-badge" [class.no-room]="!trainer.trainingRoom">
+                  {{ trainer.trainingRoom || 'Not Assigned' }}
+                </span>
+              </td>
+              <td>
+                <span class="pdf-status" [class.has-pdf]="trainer.timeTablePDF">
+                  {{ trainer.timeTablePDF ? extractPDFFileName(trainer.timeTablePDF) : 'No PDF Uploaded' }}
+                </span>
+              </td>
+              <td class="actions-cell">
+                <button class="action-btn upload-btn" (click)="selectTrainerForUpload(trainer)">
+                  <i class="fas fa-upload"></i> Upload
+                </button>
+                <button 
+                  class="action-btn view-btn" 
+                  *ngIf="trainer.timeTablePDF"
+                  (click)="viewPdf(trainer.trainerId)"
+                >
+                  <i class="fas fa-eye"></i> View
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      
+      <div class="empty-state" *ngIf="!trainers.length">
+        <i class="fas fa-users-slash empty-icon"></i>
+        <h2>No Trainers Found</h2>
+        <p>There are currently no trainers registered in the system.</p>
+      </div>
+    </div>
+
+    
+    <div class="upload-modal" *ngIf="selectedTrainer">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Upload Timetable for {{ selectedTrainer.trainerName }}</h2>
+          <button class="close-btn" (click)="selectedTrainer = null" [disabled]="isUploading">
+            <i class="fas fa-times"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="file-upload-container" [class.uploading]="isUploading">
+            <input 
+              type="file" 
+              id="pdfFile" 
+              (change)="onFileSelected($event)"
+              accept=".pdf"
+              class="file-input"
+              [disabled]="isUploading"
+            >
+            <label for="pdfFile" class="file-label">
+              <i class="fas" [class.fa-cloud-upload-alt]="!isUploading" [class.fa-spinner]="isUploading"></i>
+              <span>{{ isUploading ? 'Uploading...' : 'Choose PDF file or drag it here' }}</span>
+            </label>
+          </div>
+
+          
+          <div class="progress-container" *ngIf="isUploading">
+            <div class="progress-bar">
+              <div class="progress-fill" [style.width.%]="uploadProgress">
+                <span class="progress-text">{{ uploadProgress }}%</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="error-message" *ngIf="uploadError">
+            <i class="fas fa-exclamation-circle"></i>
+            {{ uploadError }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

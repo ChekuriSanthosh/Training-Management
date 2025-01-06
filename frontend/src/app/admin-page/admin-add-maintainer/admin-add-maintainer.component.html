@@ -1,0 +1,111 @@
+<div class="add-maintainer-container">
+  <div class="form-card">
+    <div class="card-header">
+      <div class="header-icon">
+        <i class="fas fa-user-plus"></i>
+      </div>
+      <h2>Add New Maintainer</h2>
+      <p class="subtitle">Create a new maintainer account</p>
+    </div>
+    
+    <div class="card-body">
+      <form (ngSubmit)="onSubmit()" #maintainerForm="ngForm">
+        <div class="form-group">
+          <label for="maintainerName">
+            <i class="fas fa-user"></i>
+            Maintainer Name
+          </label>
+          <input 
+            type="text" 
+            id="maintainerName" 
+            [(ngModel)]="maintainer.maintainerName" 
+            name="maintainerName" 
+            required 
+            placeholder="Enter maintainer name"
+            #nameInput="ngModel"
+          />
+          <div class="input-error" *ngIf="nameInput.invalid && nameInput.touched">
+            Name is required
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label for="username">
+            <i class="fas fa-envelope"></i>
+            Email Address
+          </label>
+          <input 
+            type="email" 
+            id="username" 
+            [(ngModel)]="maintainerDetails.username" 
+            name="username" 
+            required 
+            placeholder="Enter email address"
+            #emailInput="ngModel"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+          />
+          <div class="input-error" *ngIf="emailInput.invalid && emailInput.touched">
+            Please enter a valid email address
+          </div>
+        </div>
+  
+        <!-- <div class="form-group">
+          <label for="password">
+            <i class="fas fa-lock"></i>
+            Password
+          </label>
+          <input 
+            type="password" 
+            id="password" 
+            [(ngModel)]="maintainerDetails.password" 
+            name="password" 
+            required 
+            placeholder="Enter password"
+            #passwordInput="ngModel"
+            minlength="6"
+          />
+          <div class="input-error" *ngIf="passwordInput.invalid && passwordInput.touched">
+            Password must be at least 6 characters long
+          </div>
+        </div> -->
+  
+        <div class="form-group">
+          <label for="role">
+            <i class="fas fa-tag"></i>
+            Role
+          </label>
+          <input 
+            type="text" 
+            id="role" 
+            [(ngModel)]="maintainerDetails.role" 
+            name="role" 
+            disabled 
+            class="disabled-input"
+          />
+        </div>
+
+        <div class="button-group">
+          <button type="reset" class="btn reset-btn">
+            <i class="fas fa-undo"></i>
+            Reset Form
+          </button>
+          <button 
+            type="submit" 
+            class="btn submit-btn"
+            [disabled]="maintainerForm.invalid"
+          >
+            <i class="fas fa-save"></i>
+            Save Maintainer
+          </button>
+        </div>
+
+        
+        <div class="notification success" *ngIf="id">
+          <i class="fas fa-check-circle"></i>
+          <span>{{id}}</span>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+

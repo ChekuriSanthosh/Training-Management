@@ -1,0 +1,94 @@
+<div class="attendance-outer-container">
+    <div class="attendance-container">
+      
+      <div *ngIf="loading" class="loading-state">
+        <div class="spinner"></div>
+        <p>Loading attendance records...</p>
+      </div>
+  
+      
+      <div *ngIf="error" class="error-message">
+        <p>{{ error }}</p>
+      </div>
+  
+      
+      <div *ngIf="noTrainingRoom" class="no-room-message">
+        <div class="message-card">
+          <i class="fas fa-chalkboard-teacher"></i>
+          <h3>No Training Room Assigned</h3>
+          <p>You are currently not allocated to any training room.</p>
+        </div>
+      </div>
+  
+      
+      <div *ngIf="!loading && !error && !noTrainingRoom" class="attendance-content">
+        <h2>Attendance Management</h2>
+  
+        
+        <div class="date-navigation">
+          <button 
+            [disabled]="!canGoPrevious()" 
+            (click)="previousDates()"
+            class="nav-button">
+            <span class="icon">‹</span>
+          </button>
+          
+          <span class="date-range">
+            {{ formatDate(getVisibleDates()[0].date) }} - 
+            {{ formatDate(getVisibleDates()[getVisibleDates().length - 1].date) }}
+          </span>
+          
+          <button 
+            [disabled]="!canGoNext()" 
+            (click)="nextDates()"
+            class="nav-button">
+            <span class="icon">›</span>
+          </button>
+        </div>
+  
+        
+        <div class="table-responsive">
+          <table class="attendance-table">
+            <thead>
+              <tr>
+                <th class="fixed-column">Student Name</th>
+                <th *ngFor="let date of getVisibleDates()">
+                  {{ formatDate(date.date) }}
+                  <button 
+                    (click)="markAllPresent(date.date)"
+                    class="mark-all-button"
+                    [disabled]="savingAttendance">
+                    Mark All Present
+                  </button>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let student of students">
+                <td class="fixed-column">{{ student.studentName }}</td>
+                <td *ngFor="let date of getVisibleDates()" 
+                    class="attendance-cell">
+                  <div class="attendance-controls">
+                    <button 
+                      [class.active]="getAttendanceStatus(student, date) === 'P'"
+                      (click)="saveAttendance(student, date, 'P')"
+                      class="attendance-button present"
+                      [disabled]="savingAttendance">
+                      <span class="icon">✓</span>
+                    </button>
+                    <button 
+                      [class.active]="getAttendanceStatus(student, date) === 'A'"
+                      (click)="saveAttendance(student, date, 'A')"
+                      class="attendance-button absent"
+                      [disabled]="savingAttendance">
+                      <span class="icon">✗</span>
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>

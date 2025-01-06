@@ -1,0 +1,84 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <img src="assets/images/logoo.png" alt="UST Logo" class="logo"  style="left: 0%; width: 130px; height: auto;"/>
+    <div class="container-fluid">
+      <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item dropdown" (click)="toggleDropdown($event)">
+          <a class="nav-link dropdown-toggle d-flex align-items-center">
+            <img src="/assets/images/boy.png" 
+                 class="profile-icon" 
+                 alt="Profile Icon" 
+                 loading="lazy"/>
+          </a>
+          <ul class="dropdown-menu" [ngClass]="{'show': dropdownOpen}" >
+            <li> 
+              <a class="dropdown-item" (click)="Logout()" style="padding-left:20px;">
+                <i class="fas fa-sign-out-alt me-2"></i>
+                Logout
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  
+  
+  <div class="sidebar-overlay" 
+       [ngClass]="{'show': isSidebarOpen}" 
+       (click)="toggleSidebar()">
+  </div>
+  
+  
+  <nav id="studentSidebarMenu" 
+       class="sidebar" 
+       [ngClass]="{'show': isSidebarOpen}">
+    <div class="position-sticky">
+      <div class="list-group list-group-flush mx-3 mt-4">
+        <a routerLink="student-viewdetails" 
+           routerLinkActive="active" 
+           class="list-group-item list-group-item-action">
+          <i class="fas fa-user-circle"></i>
+          <span>My Profile</span>
+        </a>
+  
+        <a routerLink="student-viewmarks" 
+           routerLinkActive="active" 
+           class="list-group-item list-group-item-action">
+          <i class="fas fa-chart-bar"></i>
+          <span>My Marks</span>
+        </a>
+  
+        <a routerLink="student-viewclassmarks" 
+           routerLinkActive="active" 
+           class="list-group-item list-group-item-action">
+          <i class="fas fa-users"></i>
+          <span>Class Marks</span>
+        </a>
+  
+        <a routerLink="student-viewclassattendence" 
+           routerLinkActive="active" 
+           class="list-group-item list-group-item-action">
+          <i class="fas fa-calendar-check"></i>
+          <span>Attendance</span>
+        </a>
+
+        <a routerLink="student-post-attendance" 
+           routerLinkActive="active" 
+           class="list-group-item list-group-item-action">
+          <i class="fas fa-calendar-check"></i>
+          <span>Post Attendance</span>
+        </a>
+  
+        <a routerLink="student-feedback" 
+           routerLinkActive="active" 
+           class="list-group-item list-group-item-action">
+          <i class="fas fa-comment-alt"></i>
+          <span>Feedback</span>
+        </a>
+      </div>
+    </div>
+  </nav>

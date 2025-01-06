@@ -1,0 +1,158 @@
+
+<div class="attendance-container">
+  <div class="content-wrapper">
+    
+    <div class="attendance-content">
+      
+      <div class="loading-state" *ngIf="loading">
+        <div class="spinner"></div>
+        <p>Checking attendance eligibility...</p>
+      </div>
+
+      
+      <div class="error-state" *ngIf="error">
+        <i class="fas fa-exclamation-circle"></i>
+        <p>{{ error }}</p>
+      </div>
+
+      
+      <div class="attendance-card" *ngIf="!loading && !error">
+        <div class="card-header">
+          <i class="fas fa-user-clock"></i>
+          <h2>Daily Attendance</h2>
+        </div>
+
+        
+        <div class="time-display">
+          <div class="current-time">{{ formatTime(currentTime) }}</div>
+          <div class="date-display">{{ currentTime | date:'fullDate' }}</div>
+        </div>
+
+        
+        <div class="student-info" *ngIf="student">
+          <div class="info-item">
+            <i class="fas fa-user"></i>
+            <span class="label">Name:</span>
+            <span class="value">{{ student.studentName }}</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-envelope"></i>
+            <span class="label">Email:</span>
+            <span class="value">{{ student.studentEmail }}</span>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-door-open"></i>
+            <span class="label">Room:</span>
+            <span class="value">{{ student.trainingRoom }}</span>
+          </div>
+        </div>
+
+        
+        <div class="requirements-list">
+          <h3>Attendance Requirements</h3>
+          <ul>
+            <li [class]="getRequirementStatus(isTimeValid)">
+              <i class="fas" [class.fa-check-circle]="isTimeValid" 
+                 [class.fa-times-circle]="!isTimeValid"></i>
+              <span>Time Window (9:00 AM - 10:00 AM)</span>
+            </li>
+            <li [class]="getRequirementStatus(isLocationValid)">
+              <i class="fas" [class.fa-check-circle]="isLocationValid" 
+                 [class.fa-times-circle]="!isLocationValid"></i>
+              <span>Within 1km of UST Trivandrum</span>
+            </li>
+          </ul>
+        </div>
+
+        
+        <div class="action-section" *ngIf="canMarkAttendance">
+          <button
+                  (click)="markAttendance()"
+                  class="mark-button">
+            <i class="fas fa-check"></i>
+            Mark Attendance
+          </button>
+
+          <div class="message" *ngIf="!canMarkAttendance && attendanceMessage">
+            <i class="fas fa-exclamation-triangle"></i>
+            <p>{{ attendanceMessage }}</p>
+          </div>
+
+          <div class="success-message" *ngIf="success">
+            <i class="fas fa-check-circle"></i>
+            <p>{{ success }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="location-container">
+      <div class="location-card">
+        <div class="location-header">
+          <i class="fas fa-map-marker-alt"></i>
+          <h3>Location Status</h3>
+        </div>
+        
+        <div class="location-content">
+          
+          <div class="permission-status" *ngIf="!isLocationPermissionGranted">
+            <i class="fas fa-location-arrow"></i>
+            <p>Please enable location services to mark attendance</p>
+          </div>
+
+          
+          <div class="location-info" *ngIf="isLocationPermissionGranted">
+            <div class="coordinates-info">
+              <h4>Your Location</h4>
+              <p>Latitude: {{ currentLocation.latitude.toFixed(6) }}</p>
+              <p>Longitude: {{ currentLocation.longitude.toFixed(6) }}</p>
+              <a [href]="getGoogleMapsLink()" target="_blank" class="maps-link">
+                <i class="fas fa-map-marked-alt"></i>
+                View on Google Maps
+              </a>
+            </div>
+
+            <div class="distance-info">
+              <span class="label">Distance from UST:</span>
+              <span class="value" [class.within-range]="isLocationValid">
+                {{ currentLocation.distance.toFixed(2) }} km
+              </span>
+            </div>
+
+            <div class="accuracy-info">
+              <span class="label">GPS Accuracy:</span>
+              <span class="value">
+                ± {{ (currentLocation.accuracy / 1000).toFixed(2) }} km
+              </span>
+            </div>
+          </div>
+
+          <div class="address-info" *ngIf="isLocationPermissionGranted">
+            <h4>Current Address:</h4>
+            <p>{{ currentLocation.address }}</p>
+          </div>
+
+          <div class="ust-location-info">
+            <h4>UST Trivandrum Office</h4>
+            <p>Latitude: {{ ustLocation.latitude }}</p>
+            <p>Longitude: {{ ustLocation.longitude }}</p>
+            <a [href]="getUSTMapsLink()" target="_blank" class="maps-link">
+              <i class="fas fa-building"></i>
+              View Office Location
+            </a>
+            <p class="range-info">Allowed Range: 1 km</p>
+          </div>
+
+          
+          <div class="status-indicator" [class.valid]="isLocationValid">
+            <i class="fas" [class.fa-check-circle]="isLocationValid" 
+               [class.fa-times-circle]="!isLocationValid"></i>
+            <span>
+              {{ isLocationValid ? 'Within Range' : 'Outside Range' }}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

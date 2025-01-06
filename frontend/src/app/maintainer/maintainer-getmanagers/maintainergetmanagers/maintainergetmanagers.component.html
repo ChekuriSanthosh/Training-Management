@@ -1,0 +1,45 @@
+
+<main>
+    <div class="managers-container" style="margin-left: auto; margin-top: 4%;">
+        <div class="content-wrapper">
+            
+            <div class="header-section">
+                <h1 class="title">
+                    <i class="fas fa-user-tie"></i> Project Managers
+                </h1>
+            </div>
+
+            
+            <div class="managers-grid">
+                <div class="manager-card" *ngFor="let manager of managers">
+                    <div class="manager-avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    
+                    <div class="manager-info">
+                        <h2 class="manager-name">{{ manager.managerName }}</h2>
+                        <p class="manager-email">
+                            <i class="fas fa-envelope"></i> {{ manager.manageremail || 'No email provided' }}
+                        </p>
+                        <div class="manager-details">
+                            <span class="account-type-badge">
+                                <i class="fas fa-id-badge"></i> {{ manager.accountType }}
+                            </span>
+                            <span class="requests-badge">
+                                <i class="fas fa-clipboard-list"></i>
+                                {{ manager.createdRequests.length }} Request{{ manager.createdRequests.length !== 1 ? 's' : '' }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+            <div class="empty-state" *ngIf="!managers.length">
+                <i class="fas fa-users-slash empty-icon"></i>
+                <h2>No Managers Found</h2>
+                <p>There are currently no managers registered in the system.</p>
+            </div>
+        </div>
+    </div>
+</main>
